@@ -46,8 +46,8 @@ export default function App() {
           <div className="avatarWrap" aria-hidden="true">
             <img
               className="avatar"
-              src="/avatar.jpg"
-              alt=""
+              src={`${import.meta.env.BASE_URL}avatar.jpg`}
+              alt="Avatar"
               onError={(e) => {
                 // hide broken image; keep the circle
                 e.currentTarget.style.display = "none";
