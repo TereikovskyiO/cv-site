@@ -1,0 +1,265 @@
+:root {
+  /* tune these if you want exact colors */
+  --teal: #123b37;      /* banner + right section labels */
+  --sidebar: #2b2e36;   /* left column background */
+  --muted: #6b7280;
+  --text: #111827;
+  --paper: #ffffff;
+}
+
+.page {
+  background: #f3f4f6;
+  min-height: 100vh;
+  padding: 18px;
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topBar {
+  max-width: 980px;
+  margin: 0 auto 10px auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+.btn {
+  border: 1px solid #d1d5db;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn:hover { background: #f9fafb; }
+
+.printHint {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-right: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+
+.paper {
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid #e5e7eb;
+}
+
+/* ===== Banner (like old PDF) ===== */
+.banner {
+  background: var(--teal);
+  color: white;
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.avatarWrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 999px;
+}
+
+.name {
+  margin: 0 0 8px 0;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.contacts {
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+.contactItem a {
+  color: white;
+  text-decoration: none;
+}
+.contactItem a:hover { text-decoration: underline; }
+
+/* ===== Two columns ===== */
+.columns {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  min-height: 600px;
+}
+
+.left {
+  background: var(--sidebar);
+  color: #e5e7eb;
+  padding: 18px 18px 22px 18px;
+  font-size: 14px;
+}
+
+.right {
+  padding: 18px 22px 22px 22px;
+  font-size: 14px;
+}
+
+/* Section titles differ per column (matches old PDF style) */
+.left .sectionTitle {
+  margin: 18px 0 10px 0;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.right .sectionTitle {
+  display: inline-block;
+  background: var(--teal);
+  color: white;
+  padding: 6px 10px;
+  margin: 18px 0 10px 0;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Content */
+.block { margin-bottom: 14px; }
+.line { margin-bottom: 10px; }
+
+.paragraph {
+  line-height: 1.55;
+  margin: 0 0 10px 0;
+}
+
+.job { margin-bottom: 18px; }
+
+.jobHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.jobTitle {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.jobDates {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.jobCompany {
+  margin: 3px 0 8px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.miniHeading {
+  font-weight: 800;
+  margin: 10px 0 4px 0;
+  font-size: 14px;
+}
+
+.edu { margin-bottom: 16px; }
+
+/* ===== Print tuning ===== */
+@media print {
+  /* IMPORTANT: To match old PDF colors, enable "Background graphics" in Chrome print dialog */
+  .noPrint { display: none !important; }
+
+  .page { background: white; padding: 0; }
+  .paper { border: none; max-width: none; }
+
+    /* Force sidebar background on every printed page */
+  .paper {
+    background: linear-gradient(to right, var(--sidebar) 0 290px, #ffffff 290px 100%) !important;
+  }
+
+  /* Avoid double painting inside columns in print */
+  .left { background: transparent !important; }
+  .right { background: transparent !important; }
+
+
+  /* A4 sizing + margins */
+  @page { size: A4; margin: 0; }
+
+  /* Avoid Chrome adding headers/footers: you must disable them in Print dialog */
+  a { text-decoration: none; color: inherit; }
+
+  /* ==== ADD FROM HERE ==== */
+
+  /* Preserve colors exactly */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Keep banner together */
+  .banner {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Replace grid with stable print layout */
+  .columns {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .left,
+  .right {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  /* Fixed sidebar width */
+  .left { width: 290px; }
+  .right { width: auto; }
+
+  /* Prevent ugly splits, but allow long jobs to flow */
+.job,
+.edu {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Allow splitting inside long job descriptions */
+.jobSection {
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+
+    .printHint {
+    display: none;
+  }
+
+/* FINAL SAFETY OVERRIDE */
+.job {
+  break-inside: auto !important;
+  page-break-inside: auto !important;
+}
+
+  /* ==== END ADDITION ==== */
+}
+
