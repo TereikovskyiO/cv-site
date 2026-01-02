@@ -107,6 +107,49 @@ export default function App() {
               </div>
             ))}
 
+            {/* PET PROJECTS */}
+            <section className="section">
+              <div className="sectionTitle">PET PROJECTS</div>
+
+              {cv.petProjects?.map((p, idx) => (
+                <div className="job" key={idx}>
+                  <div className="jobHeader">
+                    <div className="jobTitle">{p.name}</div>
+                  </div>
+
+                  {p.subtitle && <div className="jobCompany">{p.subtitle}</div>}
+
+                  {p.description && (
+                    <div className="jobSection">
+                      <div className="jobText">{p.description}</div>
+                    </div>
+                  )}
+
+                  {p.bullets?.length > 0 && (
+                    <div className="jobSection">
+                      <ul className="bullets">
+                        {p.bullets.map((b, i) => (
+                          <li key={i}>{b}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {p.linkUrl && (
+                    <div className="jobSection">
+                      <div className="jobText">
+                        <strong>{p.linkLabel}:</strong>{" "}
+                        <a href={p.linkUrl} target="_blank" rel="noreferrer">
+                          {p.linkUrl}
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </section>
+
+
             <SectionTitle>EDUCATION</SectionTitle>
             {cv.education.map((e, idx) => (
               <div key={idx} className="edu">

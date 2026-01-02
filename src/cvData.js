@@ -27,6 +27,8 @@ export const cv = {
 
   "C — OpenMP",
 
+  "Mobile — Android (Kotlin), CameraX, Foreground Services, Google Play release",
+
   "Matlab — built-in tools for machine learning, visualization for ML models, signal processing",
 
   "Azure DevOps, AWS (SageMaker, ECR, EC2, S3, Lambda), Google Cloud SDK, Docker, GitLab, GitHub, PyCharm, Google Colab, Jupyter Notebook, OpenAI API",
@@ -118,6 +120,27 @@ export const cv = {
       ],
     },
   ],
+
+    petProjects: [
+    {
+      name: "VideoRegistrator — Android Application (Google Play)",
+      subtitle: "Kotlin, Android SDK, CameraX, Foreground Services",
+      description:
+        "Personal Android application designed for continuous and reliable video recording with automatic segmentation into time-based chunks. Built to support long-running background recording scenarios with stable performance and controlled resource usage.",
+      bullets: [
+        "Developed the application from scratch using Kotlin and Android SDK",
+        "Implemented background video recording using Foreground Services",
+        "Integrated CameraX for stable camera access and lifecycle handling",
+        "Designed chunk-based video storage with configurable segment duration",
+        "Managed runtime permissions, background execution constraints, and device-specific behaviors",
+        "Published and maintained the application on Google Play; owned the full release lifecycle",
+      ],
+      linkLabel: "Google Play",
+      linkUrl:
+        "https://play.google.com/store/apps/details?id=com.archimhdhs.videoregistrator",
+    },
+  ],
+
 
   education: [
     {
